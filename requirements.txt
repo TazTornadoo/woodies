@@ -1,2 +1,4 @@
 ipywidgets
 pandas
+numpy
+openpyxl
