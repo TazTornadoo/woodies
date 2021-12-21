@@ -1,1 +1,0 @@
-Just some word so the file is in Git.
