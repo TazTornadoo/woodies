@@ -2,3 +2,5 @@ ipywidgets
 pandas
 numpy
 openpyxl
+beautifulsoup4
+tqdm

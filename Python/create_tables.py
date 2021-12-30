@@ -7,7 +7,7 @@ import pandas as pd
  .to_sql('sales', con=connection, if_exists="replace", index=False))
 
 # Read and input the Reklamationscodes into the database
-(pd.read_excel("./Data/Source/Reklamationsgrundcodes_Filter_v1.2.xlsm", dtype='str', header = 18, index_col=0)
+(pd.read_excel("./Data/Source/Reklamationsgrundcodes_Filter_v1.2.xlsm", dtype='str', header = 16, index_col=0)
  .to_sql('complaint_codes', con=connection, if_exists="replace", index=False))
 
 # Read file and input into the database.
