@@ -1,4 +1,9 @@
-)'''select a.text, d."Grund für Beschwerde" from 
+from data_storage import connection
+import pandas as pd
+
+#Down below you find a template to retrieve data in a dataframe and load it into a dataframe
+
+df = pd.read_sql_query('''select a.text, d."Grund für Beschwerde" from 
 (select * from emails z
 group by z."from"
 having count(*) = 1) a
@@ -8,5 +13,5 @@ join complaint_codes d on c."Return Reason Code" = d.Reklamationscode''', connec
 
 df = df.drop_duplicates(subset=['text'], keep='first')
 
-df.to_sql('target_table', con=connection, if_exists="replace", index=False)
+df.to_sql('test', con=connection, if_exists="replace", index=False)
 
