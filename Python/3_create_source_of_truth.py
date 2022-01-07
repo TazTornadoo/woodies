@@ -13,5 +13,5 @@ join complaint_codes d on c."Return Reason Code" = d.Reklamationscode''', connec
 
 df = df.drop_duplicates(subset=['text'], keep='first')
 
-df.to_sql('test', con=connection, if_exists="replace", index=False)
+df.to_sql('sot_stage1', con=connection, if_exists="replace", index=False)
 
