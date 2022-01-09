@@ -3,6 +3,7 @@ from email.parser import BytesParser
 from email.policy import default
 from bs4 import BeautifulSoup
 import unicodedata
+import re
 
 # Import packages for dealing with the data structures
 import pandas as pd
@@ -62,9 +63,23 @@ for mail in tqdm(all_files):
 # Assert that not too many files are not readable.
 assert not_readable > 10
 
+# create DataFrame
+df = pd.DataFrame({"to": to_,
+                   "from": from_,
+                   "text": text,
+                   "date": date})
+
+# function to clean email addresses
+def extract_mails(text):
+    if "<" in text:
+        pattern = r"(?<=<).*?(?=>)"
+        return re.search(pattern, text).group(0)
+    else:
+        return text
+
+# clean e-mail addresses column
+df["from"] = df["from"].apply(extract_mails)
+
+
 # Insert data to database
-(pd.DataFrame({"to": to_,
-               "from": from_,
-               "text": text,
-               "date": date})
- .to_sql('emails', con=connection, if_exists="replace", index=False))
+(df.to_sql('emails', con=connection, if_exists="replace", index=False))
