@@ -4,3 +4,4 @@ numpy
 openpyxl
 beautifulsoup4
 tqdm
+re
