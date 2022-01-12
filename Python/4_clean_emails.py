@@ -34,7 +34,7 @@ def clean_mail_text(corpus):
     return new_corpus
 
 
-df = pd.read_sql_query('''Select * from test''', connection)
+df = pd.read_sql_query('''Select * from sot_stage1''', connection)
 
 mail_text = df['text'].to_list()
 new_mail_text = clean_mail_text(mail_text)
