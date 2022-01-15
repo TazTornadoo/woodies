@@ -42,6 +42,9 @@ new_mail_text = clean_mail_text(mail_text)
 new_mail_text = [" ".join(x) for x in new_mail_text]
 df['text'] = new_mail_text
 
+# remove all mails with less than 15 words
+df = df[df['text'].str.split().str.len() >= 15]
+
 df.to_sql('sot_stage2', con=connection, if_exists="replace", index=False)
 
 
