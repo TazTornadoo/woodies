@@ -4,25 +4,32 @@ import spacy
 import de_core_news_sm
 from spacy.tokens import Token
 from spacy.lang.de.stop_words import STOP_WORDS
+import os
+from tqdm import tqdm
 
 
 # IMPORTANT 
 # Before executing the python skript please execute the following line in the terminal
 # python -m spacy download de_core_news_sm
-
+os.system("python -m spacy download de_core_news_sm")
 
 def apply_spacy(list_of_list, list_of_stopwords):
 
     spacy_complaints = []
 
-    for complaint in list_of_list:
+    
+    print("applying tokenization")
+
+    for complaint in tqdm(list_of_list):
         spacy_complaints.append(nlp(complaint))
 
     
     cleaned_corpus = []
 
+    print('NLP preprocessing for mail texts')
 
-    for sentence in list_of_list:
+
+    for sentence in tqdm(list_of_list):
 
         sentence_cleaned = [token.lower_ for token in nlp(sentence)
                             if token._.is_lemma_stop == False and 
