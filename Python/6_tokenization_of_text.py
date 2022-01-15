@@ -28,10 +28,11 @@ def apply_spacy(list_of_list, list_of_stopwords):
                             if token._.is_lemma_stop == False and 
                             token.is_punct == False and 
                             token.is_space == False and
-                            token.is_alpha == True]
+                            token.is_alpha == True and
+                            token.pos_ != "PROPN"]
 
-        sentence_cleaned = [word for word in sentence_cleaned
-                            if word not in list_of_stopwords]
+        #sentence_cleaned = [word for word in sentence_cleaned
+        #                    if word not in list_of_stopwords]
 
         sentence_cleaned = ' '.join(sentence_cleaned)
         cleaned_corpus.append(sentence_cleaned)
