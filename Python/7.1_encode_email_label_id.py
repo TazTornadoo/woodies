@@ -9,7 +9,7 @@ df = pd.read_sql_query('''Select * from sot_stage4''', connection)
 
 # step 1
 # set threshold in percentage (e.g. 3% out of all records)
-thres = 3
+thres = 8
 
 # calculate the frequency of each email label
 s = (df['Grund für Beschwerde'].value_counts(normalize=True) * 100).gt(thres)
