@@ -54,7 +54,7 @@ stopwords_collection = ['mit', 'freundlichen',
                         'sehr', 'geehrter', 'geehrte', 'damen',
                         'herren', 'herr', 'diese', 'nachricht', 'gmx'
                         'mail', 'android', 'mobiltelefon',
-                        'gesendet', 'dame']
+                        'gesendet', 'dame', 're', 'aw']
 
 stop_words_getter = lambda token: token.text in STOP_WORDS or token.lemma_ in STOP_WORDS or token.is_lower in STOP_WORDS 
 Token.set_extension("is_lemma_stop", getter=stop_words_getter, force=True)
