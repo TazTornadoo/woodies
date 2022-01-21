@@ -1,7 +1,8 @@
 from data_storage import connection
 import pandas as pd
-import spacy
 import os
+os.system("pip install spacy")
+import spacy
 os.system("python -m spacy download de_core_news_sm")
 import de_core_news_sm
 from spacy.tokens import Token
