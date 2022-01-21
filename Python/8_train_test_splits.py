@@ -22,10 +22,10 @@ if verbose:
 
 # splitting for the id-encoded set
 X_train_id, X_test_id, y_train_id, y_test_id = train_test_split(df_id["text"],
-                                                                df_id["GfB_label"],
+                                                                df_id["Grund für Beschwerde"],
                                                                 random_state=seed,
                                                                 test_size=0.2,
-                                                                stratify=df_id["GfB_label"])
+                                                                stratify=df_id["Grund für Beschwerde"])
 
 if verbose:
     # check splitting
