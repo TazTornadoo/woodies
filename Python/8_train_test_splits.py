@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 seed = 0
 
 # verbosity
-verbose = False
+verbose = True
 
 ############## for id-based encoded set #################
 # read DataFrame
