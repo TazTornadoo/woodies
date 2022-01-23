@@ -37,7 +37,7 @@ print(y_train_id.head())
 
 
 # Define the model repo
-model_name = "bert-base-german-cased" 
+model_name = "bert-base-german-dbmdz-uncased" 
 
 
 # Download pytorch model
@@ -48,10 +48,8 @@ val = t.preprocess_test(X_test_id["text"].tolist(), y_test_id["Grund für Beschw
 model = t.get_classifier(metrics=["accuracy"])
 learner = ktrain.get_learner(model, train_data=trn, val_data = val, batch_size=6)
 
-learner.fit_onecycle(5e-5, 1)
+learner.fit_onecycle(5e-5, 10)
 
 learner.view_top_losses(n=5, preproc=t)
-
-print(X_test_id["text"][77])
 
 # We still have to do the accuracy
