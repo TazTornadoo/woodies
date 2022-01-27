@@ -22,6 +22,29 @@ Test_X = Test_X['text']
 Train_Y = Train_Y['Grund für Beschwerde']
 Test_Y = Test_Y['Grund für Beschwerde']
 
+############## Model Evaluation #################
+from sklearn.metrics import f1_score
+
+def evaluation(y_pred, y_true):
+    """ This function evaluates the model calculating the weighted f1-score based
+    on the inputs `y_pred` (predictions by the model) and `y_true` (actual values). 
+    
+    Parameters
+    ----------
+    y_pred: list or np.array
+        This parameter stores the predicted classes.
+
+    y_true: list or np.array
+        This parameter stores the actual classes (true values).
+
+    Returns
+    -------
+    This function returns weighted f1-score.
+    """
+    weighted_f1_score = f1_score(y_true, y_pred, average='weighted')
+    
+    return weighted_f1_score 
+
 ############## Word Vectorization #################
 # build a vocabulary of words which it has learned from the corpus data
 Tfidf_vect = TfidfVectorizer()
@@ -38,8 +61,9 @@ Naive = naive_bayes.MultinomialNB()
 Naive.fit(Train_X_Tfidf,Train_Y)
 # predict the labels on validation dataset
 predictions_NB = Naive.predict(Test_X_Tfidf)
-# Use accuracy_score function to get the accuracy
+# Get the accuracy & f1 score
 print("Naive Bayes Accuracy Score -> ",accuracy_score(predictions_NB, Test_Y)*100)
+print("Naive Bayes f1 Score -> ",evaluation(predictions_NB, Test_Y)*100)
 
 # Classifier - Algorithm - SVM
 # fit the training dataset on the classifier
@@ -47,8 +71,9 @@ SVM = svm.SVC(C=100, kernel='rbf', gamma=0.01, decision_function_shape = 'ovr')
 SVM.fit(Train_X_Tfidf,Train_Y)
 # predict the labels on validation dataset
 predictions_SVM = SVM.predict(Test_X_Tfidf)
-# Use accuracy_score function to get the accuracy
+# Get the accuracy & f1 score
 print("SVM Accuracy Score -> ",accuracy_score(predictions_SVM, Test_Y)*100)
+print("SVM f1 Score -> ",evaluation(predictions_SVM, Test_Y)*100)
 
 # Classifier - Algorithm - RandomForest
 # fit the training dataset on the classifier
@@ -56,8 +81,9 @@ RF = RandomForestClassifier(n_estimators = 20, criterion = 'entropy', random_sta
 RF.fit(Train_X_Tfidf,Train_Y)
 # predict the labels on validation dataset
 predictions_RF = RF.predict(Test_X_Tfidf)
-# Use accuracy_score function to get the accuracy
+# Get the accuracy & f1 score
 print("RF Accuracy Score -> ",accuracy_score(predictions_RF, Test_Y)*100)
+print("RF f1 Score -> ",evaluation(predictions_RF, Test_Y)*100)
 
 ############## Gridsearch for SVM #################
 # defining parameter range
@@ -72,22 +98,3 @@ print("RF Accuracy Score -> ",accuracy_score(predictions_RF, Test_Y)*100)
 
 # print best parameter after tuning
 #print(grid.best_params_)
-
-
-############## Model Evaluation #################
-y_pred = SVM.predict(Test_X_Tfidf)
-
-# Model evaluation
-
-cmtx = pd.DataFrame(
-    confusion_matrix(Test_Y, y_pred),
-    index=['true:0', 'true:1', 'true:2'], 
-    columns=['pred:0', 'pred:1', 'pred:2']
-)
-print("Detailed SVM Evaluation Report")
-
-print('Accuracy Score:', accuracy_score(Test_Y, y_pred))
-
-print(cmtx)
-
-print(classification_report(Test_Y,y_pred))
