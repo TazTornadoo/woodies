@@ -7,4 +7,5 @@ tqdm
 spacy
 transformers
 tensorflow
+torch
 ktrain
