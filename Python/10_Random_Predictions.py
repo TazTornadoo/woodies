@@ -33,10 +33,8 @@ def evaluation(y_pred, y_true):
     ----------
     y_pred: list or np.array
         This parameter stores the predicted classes.
-
     y_true: list or np.array
         This parameter stores the actual classes (true values).
-
     Returns
     -------
     This function returns weighted f1-score.
@@ -58,8 +56,9 @@ Test_X_Tfidf = Tfidf_vect.transform(Test_X)
 # Dummy Regressor
 from sklearn.dummy import DummyClassifier
 random_clf = DummyClassifier(strategy="uniform")
-random_clf.fit(X, y)
+random_clf.fit(Train_X_Tfidf, Train_Y)
 # predict the labels on validation dataset
-predictions_random_dummy = dummy_clf.predict(Train_X_Tfidf,Train_Y)
+predictions_random_dummy = random_clf.predict(Test_X_Tfidf)
+
 # Get f1 score
 print("Dummy Random f1 Score -> ",evaluation(predictions_random_dummy, Test_Y)*100)
