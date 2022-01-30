@@ -45,11 +45,12 @@ for mail in tqdm(all_files):
             # If that is the case, then try to extract all the wished data
             try:
                 # Especially the text needs some preprocessing
-                prep = unicodedata.normalize("NFKD", BeautifulSoup(headers.get_body(preferencelist=('html', 'plain')).as_string(), 'html.parser').text)
-                prep = prep.split("--- ORIGINAL MESSAGE BEGIN ---",1)[1]
-                prep = prep.split("--- ORIGINAL MESSAGE END ---",1)[0]
+                prep = unicodedata.normalize("NFKD", BeautifulSoup(headers.get_body(
+                    preferencelist=('html', 'plain')).as_string(), 'html.parser').text)
+                prep = prep.split("--- ORIGINAL MESSAGE BEGIN ---", 1)[1]
+                prep = prep.split("--- ORIGINAL MESSAGE END ---", 1)[0]
                 # Append the different extracted values to lists, which later on
-                # will be combined to a dataframe. 
+                # will be combined to a dataframe.
                 text.append(prep)
                 to_.append(headers['to'])
                 from_.append(headers['from'])
@@ -70,12 +71,15 @@ df = pd.DataFrame({"to": to_,
                    "date": date})
 
 # function to clean email addresses
+
+
 def extract_mails(text):
     if "<" in text:
         pattern = r"(?<=<).*?(?=>)"
         return re.search(pattern, text).group(0)
     else:
         return text
+
 
 # clean e-mail addresses column
 df["from"] = df["from"].apply(extract_mails)

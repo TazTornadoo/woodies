@@ -6,5 +6,3 @@ if os.path.isdir('database') is False:
         if file[-2:] == "py" and file[0].isnumeric() == True:
             os.system(f"chmod +x Python/{file}")
             os.system(f"python Python/{file}")
-            
-            

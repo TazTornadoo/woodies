@@ -17,19 +17,16 @@ def clean_mail_text(corpus):
         sentence = [x.replace("=C3=9C", "Ü") for x in sentence]
         sentence = [x.replace("=20", "") for x in sentence]
 
-        
         for word in sentence:
 
             if "=" in word and sentence.index(word) != len(sentence) - 1:
                 replace_string = sentence[sentence.index(word) + 1]
-                sentence[sentence.index(word)] = word.replace("=", replace_string)
-            
+                sentence[sentence.index(word)] = word.replace(
+                    "=", replace_string)
+
                 del sentence[sentence.index(replace_string)]
-    
-            
 
         new_corpus.append(sentence)
-
 
     return new_corpus
 
@@ -43,7 +40,3 @@ new_mail_text = [" ".join(x) for x in new_mail_text]
 df['text'] = new_mail_text
 
 df.to_sql('sot_stage2', con=connection, if_exists="replace", index=False)
-
-
-
-

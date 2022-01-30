@@ -5,11 +5,11 @@ import pandas as pd
 df = pd.read_sql_query('''Select * from sot_stage2''', connection)
 
 # hard-coded list of common German email phrases
-phrases = [ "sehr geehrte damen und herren", "damen und herren", "mit freundlichen grüßen", "hallo", "sehr geehrter herr", "sehr geehrte frau",
-            "damen und herren", "mit freundlichen grüßen", "Diese Nachricht wurde von meinem Android Mobiltelefon mit WEB.DE Mail gesendet",
-            "grüße", "guten tag", "guten abend", "sehr geehrtes", "kontaktformular holzprofi24 anrede: herr vorname:", "nachname:",
-            "kontaktformular holzprofi24 anrede: frau vorname:", "sehrefsehrbbsehrbf", "kundendaten:", "name:", "geehrteefgeehrtebbgeehrtebfsehr",
-            "frau", "herr", "ef ef bb bfbb ef bb", "adsp", ]
+phrases = ["sehr geehrte damen und herren", "damen und herren", "mit freundlichen grüßen", "hallo", "sehr geehrter herr", "sehr geehrte frau",
+           "damen und herren", "mit freundlichen grüßen", "Diese Nachricht wurde von meinem Android Mobiltelefon mit WEB.DE Mail gesendet",
+           "grüße", "guten tag", "guten abend", "sehr geehrtes", "kontaktformular holzprofi24 anrede: herr vorname:", "nachname:",
+           "kontaktformular holzprofi24 anrede: frau vorname:", "sehrefsehrbbsehrbf", "kundendaten:", "name:", "geehrteefgeehrtebbgeehrtebfsehr",
+           "frau", "herr", "ef ef bb bfbb ef bb", "adsp", ]
 
 df_phrases = pd.DataFrame({'phrases': phrases})
 

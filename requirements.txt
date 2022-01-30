@@ -4,8 +4,10 @@ numpy
 openpyxl
 beautifulsoup4
 tqdm
-spacy
-transformers
-tensorflow
-torch
-ktrain
+#spacy
+#transformers
+#tensorflow
+#torch
+#ktrain
+black
+flake8
